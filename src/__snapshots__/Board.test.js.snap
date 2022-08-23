@@ -23,38 +23,8 @@ exports[`<Board /> rendering inital board and win state matches snapshot for ful
           class="Cell Cell-lit"
           role="button"
         />
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
       </tr>
       <tr>
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
-      </tr>
-      <tr>
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
         <td
           class="Cell Cell-lit"
           role="button"
@@ -89,16 +59,8 @@ exports[`<Board /> rendering inital board and win state matches snapshot for ful
           class="Cell Cell-lit"
           role="button"
         />
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
       </tr>
       <tr>
-        <td
-          class="Cell Cell-lit"
-          role="button"
-        />
         <td
           class="Cell Cell-lit"
           role="button"

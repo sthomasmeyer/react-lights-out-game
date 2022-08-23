@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Cell from './Cell';
 import './Board.css';
 
-// This function has three props: 1) numRows, default five, 2) numCols, default five...
+// This function has three props: 1) numRows, default three, 2) numCols, default three...
 // and 3) oddsLit, default [0.25]. It is designed to render an HTML table of individual...
 // <Cell /> components.
-function Board({ numRows = 5, numCols = 5, oddsLit = 0.25 }) {
+function Board({ numRows = 4, numCols = 4, oddsLit = 0.25 }) {
   // Declare a new state variable 'board' w/ the [useState()] Hook.
   const [board, setBoard] = useState(createBoard());
 
@@ -85,10 +85,42 @@ function Board({ numRows = 5, numCols = 5, oddsLit = 0.25 }) {
     return board.every((row) => row.every((cell) => !cell));
   }
 
-  // Flip the cells around a given cell.
-  function flipCellsAround(coord) {
+  const flipCells = (y, x) => {
+    setBoard((gameboard) => {
+      // Change the value of the element at the given coordinates.
+      gameboard[y][x] = !gameboard[y][x];
+
+      // If the cell below the target exists, then change its value.
+      if (y + 1 < 3) {
+        gameboard[y + 1][x] = !gameboard[y + 1][x];
+      }
+
+      // If the cell above the target exists, then change its value.
+      if (y - 1 >= 0) {
+        gameboard[y - 1][x] = !gameboard[y - 1][x];
+      }
+
+      // If the cell to the right of the target exists, then change its value.
+      if (x - 1 >= 0) {
+        gameboard[y][x - 1] = !gameboard[y][x - 1];
+      }
+
+      // If the cell to the right of the target exists, then change its value.
+      if (x + 1 < 3) {
+        gameboard[y][x + 1] = !gameboard[y][x + 1];
+      }
+
+      let gameboardCopy = gameboard.map((row) => [...row]);
+
+      return gameboardCopy;
+    });
+  };
+
+  // This is an alternate version of the [flipCells()] function above. Note, it is...
+  // just as effective.
+  function altFlipCells(coordinates) {
     setBoard((oldBoard) => {
-      const [y, x] = coord.split('-').map(Number);
+      const [y, x] = coordinates.split('-').map(Number);
 
       const flipCell = (y, x, boardCopy) => {
         // If this coord is actually on board, then flip it.
@@ -119,12 +151,12 @@ function Board({ numRows = 5, numCols = 5, oddsLit = 0.25 }) {
   for (let y = 0; y < numRows; y++) {
     let row = [];
     for (let x = 0; x < numCols; x++) {
-      let coord = `${y}-${x}`;
+      let coordinates = `${y}-${x}`;
       row.push(
         <Cell
-          key={coord}
+          key={coordinates}
           isLit={board[y][x]}
-          flipCellsAroundMe={() => flipCellsAround(coord)}
+          flipAdjacentCells={() => altFlipCells(coordinates)}
         />
       );
     }
